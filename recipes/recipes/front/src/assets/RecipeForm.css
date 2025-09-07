@@ -1,0 +1,66 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #fdfdfd;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;  /* centre horizontalement le texte */
+    margin: 30px 0;
+    color: #333333;
+}
+
+form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 30px;
+    border-radius: 12px;
+    background-color: #f9cdcd;
+    margin-bottom: 80px;
+}
+
+form:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+}
+
+label {
+    display: block;
+    margin-bottom: 20px;
+    color: #444444;
+    font-weight: 600;
+}
+
+input[type="text"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 6px;
+    border: 2px solid #FF6666;
+    border-radius: 6px;
+    font-size: 1rem;
+    resize: vertical;  /* Permet à l’utilisateur de modifier la hauteur de la zone de texte en tirant la poignée de redimension. */
+    box-sizing: border-box;  /* la largeur/hauteur inclut le contenu + padding + bordure */
+}
+
+input[type="text"] {
+    display: block;
+    margin-left: 2px;
+}
+
+textarea {
+    min-height: 100px;
+}
+
+button {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background-color: #FF6666;
+    color: #ffffff;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;  /* change le curseur de la souris en main */
+}

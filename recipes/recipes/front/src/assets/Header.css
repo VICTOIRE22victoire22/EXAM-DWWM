@@ -1,0 +1,158 @@
+
+.navbar {
+  display: flex;
+  align-items: center; /* Centrage vertical */
+  gap: 30px; 
+}
+
+
+.logo {
+  width: 120px;
+  height: auto; /* S'ajuste automatiquement selon le contenu */
+  object-fit: contain;  /* L'image est redimensionnée pour être entièrement visible et la largeur et la hauteur sont conservés */
+}
+
+
+.navbar ul {
+  display: flex; /* Affiche les éléments en ligne */
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 20px;
+}
+
+.navbar li a {
+  text-decoration: none;  /* Supprime le soulignement */
+  color: #333333;
+  font-weight: 500;
+  padding: 5px 10px;    /* 5px = en haut et en bas */    /* 10px = à gauche et à droite */
+}
+
+.navbar li a:hover {
+  background-color: #000000;
+  color: #ffffff;
+  border-radius: 5px;
+}
+
+.btn-ajouter{
+  padding: 8px 15px;  
+  background-color: #FF6666;
+  color: #ffffff;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: 600;
+  white-space: nowrap;  /* empêcher le retour à la ligne automatique du texte. */
+}
+
+.btn-ajouter:hover{
+  background-color: #000000;
+  color: #ffffff;
+  border-radius: 5px;
+}
+
+header input[type="text"] {
+  padding: 6px 12px;
+  font-size: 16px;
+  border: 1.5px solid #cccccc;
+  border-radius: 5px;
+  outline-color: #FF6666;
+  min-width: 200px;
+}
+
+
+header {
+  display: flex;
+  justify-content: space-between; /* espace égal entre tous les éléments */
+  align-items: center;
+  padding: 15px 20px;
+  background-color: #FF6666;
+  flex-wrap: wrap;  /* Permet aux liens de se répartir sur plusieurs lignes si besoin */
+}
+
+
+input[type="text"] {
+  padding: 6px 10px;
+  font-size: 14px;
+  border-radius: 4px;
+  border: none;
+  margin-left: 20px;
+  min-width: 200px;
+  max-width: 300px;
+}
+
+/*---------------------------------------------------
+TABLETTE ET MOBILE
+---------------------------------------------------*/
+
+@media (max-width: 700px) {
+   /* Applique ces styles pour les écrans de 700px de large maximum*/
+header {
+  flex-direction: column; /* Les éléments sont alignés de hauts en bas */
+  align-items: stretch;  /* alignement des éléments enfants dans un conteneur flex */
+}
+
+.navbar ul {
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.navbar li a:hover {
+  background-color: #000000;
+  color: #ffffff;
+  border-radius: 5px;
+}
+
+imput-recherche {
+  margin-left: 0;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+input[type="text"] {
+  margin-left: 0;
+  margin-bottom: 10px;
+}
+}
+
+.List {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.recipeList {
+  background: #ffffff;
+  border: 2px solid #a9a0a0;
+  padding: 12px;
+  width: 220px;
+  border-radius: 6px;
+  text-align: center;
+}
+
+.recipeList h2 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.recipeList img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover; /* L'image remplit entièrement le conteneur */
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
+.recipeList p {
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #555555;
+}
+
+.recipeList a {
+  color: #FF6666;
+  text-decoration: none;
+  font-weight: 600;
+}

@@ -1,0 +1,95 @@
+.recipe-detail {
+  max-width: 600px;
+  margin: 30px auto;
+  padding: 20px;
+  background: #ffffff;
+  border: 2px solid #a9a0a0;
+  border-radius: 6px;
+  font-family: Arial, sans-serif;
+  color: #333333;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+.recipe-detail:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease;
+  background-color: #f9cdcd;
+}
+
+.recipe-detail h1 {
+  font-size: 28px;
+  text-align: center;
+}
+
+.recipe-detail img {
+  justify-self: center;  /* centrer un élément horizontalement */
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+/* Container pour ingrédients et étapes côte à côte sur grand écran */
+.steps {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+/*---------------------------------------------------
+TABLETTE ET MOBILE
+---------------------------------------------------*/
+  /* Applique ces styles pour les écrans de 700px de large maximum*/
+
+@media (max-width: 700px) {
+
+.steps {
+  grid-template-columns: 1fr;
+}
+}
+
+.recipe-detail h2 {
+  font-size: 22px;
+  margin-top: 0;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #FF6666;
+  padding-bottom: 6px;
+  color: #FF6666;
+}
+
+
+.recipe-detail ul {
+  margin-left: 20px;
+  color: #555555;
+  font-size: 16px;
+  line-height: 1.4;  /* interligne */
+}
+
+.recipe-detail ol {
+  margin-left: 20px;
+  color: #555555;
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+/* Petits titres infos temps/portions */
+.servings {
+  display: flex;
+  gap: 15px;
+  margin-top: 15px;
+  color: #666666;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.recipe-detail h3 {
+  margin: 0;
+}
+
+/* Section conseils de cuisine */
+.tips {
+  margin-top: 20px;
+}
