@@ -29,15 +29,31 @@ class RecipeController {
             res.status(500).json({ message: "Erreur lors du chargement de la recette", error });
         }
     }
-// Crée une nouvelle recette
-    async create(req, res) {
-        try {
-            const recipe = await Recipe.create(req.body);
-            res.status(201).json(recipe);
-        } catch (error) {
-            res.status(400).json({ message: "Erreur lors de la création de la recette", error });
-        }
+/// Crée une nouvelle recette
+async create(req, res) {
+  try {
+    // (temporaire pour debug) voir exactement ce que le front envoie
+    // console.log('BODY REÇU:', req.body);
+
+    // Normalisation douce : accepte categoryId / typeOfCuisineId / typeCuisine
+    const body = { ...req.body };
+    if (!body.category && body.categoryId) body.category = body.categoryId;
+    if (!body.typeOfCuisine && (body.typeOfCuisineId || body.typeCuisine)) {
+      body.typeOfCuisine = body.typeOfCuisineId || body.typeCuisine;
     }
+
+    if (!body.category || !body.typeOfCuisine) {
+      return res.status(400).json({
+        message: "Les champs 'category' et 'typeOfCuisine' sont requis (ObjectId)."
+      });
+    }
+
+    const recipe = await Recipe.create(body);
+    res.status(201).json(recipe);
+  } catch (error) {
+    res.status(400).json({ message: "Erreur lors de la création de la recette", error });
+  }
+}
 // Met à jour une recette existante partiellement
 async update(req, res) {
     try {

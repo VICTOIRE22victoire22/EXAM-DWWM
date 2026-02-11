@@ -17,4 +17,4 @@ class CategoryController {
     }
 }
 // Exporte le contrôleur pour l'utiliser dans les routes
-module.exports = new CategoryController;
+module.exports = new CategoryController();

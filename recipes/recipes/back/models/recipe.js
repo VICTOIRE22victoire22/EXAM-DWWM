@@ -13,17 +13,16 @@ const recipeSchema = mongoose.Schema({
     preparationTime: {     // Temps de préparation en minutes
         type: Number
     },
-    category: {            // Catégorie
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Category"
-    },
-    typeOfCuisine: {       // Type de cuisine
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "TypeOfCuisine"
-    },
-    description: {          // Description de la recette
-        type: String
-    },
+category: {
+  type: mongoose.Schema.Types.ObjectId,
+  ref: "Category",
+  required: true
+},
+typeOfCuisine: {
+  type: mongoose.Schema.Types.ObjectId,
+  ref: "TypeOfCuisine",
+  required: true
+},
 
     ingredients: {          // Ingrédients
         required: true,

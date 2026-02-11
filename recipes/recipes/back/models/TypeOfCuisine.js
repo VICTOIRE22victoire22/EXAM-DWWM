@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 // Schéma pour le type de cuisine
 const typeOfCuisineSchema = mongoose.Schema({
     name: {
-      required: true,
       type: String
     }
 })

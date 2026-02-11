@@ -1,0 +1,26 @@
+h1 {
+  color: blue;
+}
+
+h1,
+h2,
+p {
+  color: blue;
+}
+
+h1 {
+  color: blue;
+}
+
+.orange-color {
+  color: orange;
+}
+
+.green-color {
+  color: green;
+}
+
+#introduction {
+  border: black 3px solid;
+  background-color: lightgrey;
+}

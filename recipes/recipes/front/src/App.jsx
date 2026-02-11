@@ -19,23 +19,23 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [recipesRes, categoriesRes, typesRes] = await Promise.all([
+        const [recipesRes, categoriesRes, typeOfCuisinesRes] = await Promise.all([
           fetch("http://localhost:3000/recipes"),
           fetch("http://localhost:3000/categories"),
           fetch("http://localhost:3000/typeOfCuisines"),
         ]);
 
-        if (!recipesRes.ok || !categoriesRes.ok || !typesRes.ok) {
+        if (!recipesRes.ok || !categoriesRes.ok || !typeOfCuisinesRes.ok) {
           throw new Error("Erreur lors du chargement des données");
         }
 
         const recipesData = await recipesRes.json();
         const categoriesData = await categoriesRes.json();
-        const typesData = await typesRes.json();
+        const typeOfCuisinesData = await typeOfCuisinesRes.json();
 
         setRecipes(recipesData);
         setCategories(categoriesData);
-        setTypeOfCuisines(typesData);
+        setTypeOfCuisines(typeOfCuisinesData);
       } catch (error) {
         console.error(error);
       }
@@ -57,14 +57,8 @@ function App() {
           path="/"
           element={<Home recipes={recipes} categories={categories} />}
         />
-        <Route
-          path="/recettes"
-          element={<RecipeList recipes={recipes} />}
-        />
-        <Route
-          path="/details/:id"
-          element={<RecipeDetail recipes={recipes} />}
-        />
+        <Route path="/recettes" element={<RecipeList recipes={recipes} />} />
+        <Route path="/details/:id" element={<RecipeDetail recipes={recipes} />} />
         <Route
           path="/formulaire"
           element={
@@ -75,10 +69,7 @@ function App() {
             />
           }
         />
-        <Route
-          path="/favoris"
-          element={<FavoriteRecipes recipes={recipes} />}
-        />
+        <Route path="/favoris" element={<FavoriteRecipes recipes={recipes} />} />
       </Routes>
       <Footer />
     </BrowserRouter>

@@ -7,5 +7,7 @@ const TypeOfCuisineController = require('../controllers/typeOfCuisine.controller
 router.post('/', TypeOfCuisineController.create);
 // Route pour récupérer tous les types de cuisine
 router.get('/', TypeOfCuisineController.getAll);
+// Route pour supprimer un type de cuisine par son ID
+router.delete('/:id', TypeOfCuisineController.delete);
 
 module.exports = router;

@@ -100,9 +100,9 @@ const Home = () => {
 
           <select onChange={(e) => setSelectedTypeOfCuisine(e.target.value)} value={selectedTypeOfCuisine}>
             <option value="">Tous les types de cuisine</option>  {/* Sélecteur pour choisir un type de cuisine, avec l' option "Tous types de cuisine" */}
-            {typeOfCuisines.map((type) => (   // Liste des types de cuisine disponibles dans le menu déroulant
-              <option key={type._id} value={type._id}>
-                {type.name}
+            {typeOfCuisines.map((typeOfCuisine) => (   // Liste des types de cuisine disponibles dans le menu déroulant
+              <option key={typeOfCuisine._id} value={typeOfCuisine._id}>
+                {typeOfCuisine.name}
               </option>
             ))}
           </select>

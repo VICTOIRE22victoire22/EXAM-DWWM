@@ -1,22 +1,26 @@
+/* Style général de la page : police lisible, marges aérées, fond clair */
 body {
   font-family: Arial, sans-serif;
   margin: 20px;
   background: #f9f9f9;
 }
 
+/* En-tête de la page d'accueil (titre centré) */
 .header {
   text-align: center;
   margin-bottom: 20px;
 }
 
+/* Zone contenant les filtres : centrée, flexible, adaptée aux petits écrans */
 .filters {
   margin-top: 10px;
   display: flex;
   justify-content: center;
   gap: 10px;
-  flex-wrap: wrap;
+  flex-wrap: wrap;    /* Permet aux éléments de passer sur une nouvelle ligne si manque d'espace */
 }
 
+/* Style des menus déroulants (sélecteurs de filtres) */
 select {
   padding: 6px 10px;
   font-size: 14px;
@@ -27,59 +31,73 @@ select {
   margin-bottom: 20px;
 }
 
+/* Feedback visuel lors du survol d’un filtre */
 select:hover {
   background-color: #FF6666;
 }
 
-/* Container principal de recettes en grid */
+/* ---------------------------------------------------
+   CONTAINER PRINCIPAL DES RECETTES : GRID RESPONSIVE
+------------------------------------------------------ */
+
+/* Organisation des cartes recettes en grille flexible */
 .home {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 38px;
-  justify-items: center; /* Centre les items dans leur grille */
+  justify-items: center; /* Centre les cartes dans leur grille */
   padding: 0 10px;
 }
 
+/* Style d'une carte de recette */
 .recipeList {
   background: #ffffff;
   border: 2px solid #a9a0a0;
   padding: 12px;
   width: 100%;
-  max-width: 260px;
+  max-width: 260px;    /* largeur max pour un rendu harmonieux */
   border-radius: 6px;
   text-align: center;
   display: flex;
-  flex-direction: column;
+  flex-direction: column;    /* éléments empilés verticalement */
   align-items: center;
   gap: 8px;
   margin-bottom: 20px;
 }
+
+/* Effet visuel au survol d'une carte (mise en avant) */
 .recipeList:hover {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);  /* ombre portée sombre (noir à 50% d’opacité), décalée verticalement de 4 pixels, avec un flou de 8 pixels. */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);  /* ombre portée sombre (noir à 50% d’opacité), 
+                                               décalée verticalement de 4 pixels, avec un flou de 8 pixels. */
   transition: all 0.3s ease;
-  background-color: #f9cdcd;
+  background-color: #f9cdcd;    /* léger changement de couleur */
 }
 
+/* Titre d'une recette */
 .recipeList h2 {
   font-size: 18px;
   margin: 0;
   padding-bottom: 6px;
 }
 
+
+/* Image d'une recette : format uniforme et recadrage propre */
 .recipeList img {
   width: 100%;
   height: 200px;
-  object-fit: cover;
+  object-fit: cover;    /* évite la déformation des images */
   border-radius: 6px;
   margin-bottom: 6px;
 }
 
+/* Texte supplémentaire : durée, type de recette, etc. */
 .recipeList p {
   margin: 0;
   font-size: 14px;
-  color: #555555;
+  color: #555555;    /* gris doux pour la lisibilité */
 }
 
+/* Lien vers la page de détail d’une recette */
 .recipeList a {
   color: #FF6666;
   text-decoration: none;
@@ -87,6 +105,7 @@ select:hover {
   font-weight: 600;
 }
 
+/* Style des boutons (favoris, suppression, etc.) */
 button {
   padding: 8px 12px;
   font-size: 14px;
@@ -99,6 +118,7 @@ button {
   transition: background-color 0.3s ease;
 }
 
+/* Feedback visuel : bouton noir au survol */
 button:hover {
   background-color: #000000;
 }
@@ -109,38 +129,46 @@ TABLETTE
 /* Applique ces styles pour les écrans de 700px de large maximum*/
 
 @media (max-width: 700px) {
-  
+
+/* Réduction des colonnes pour garder des cartes lisibles */
 .home {
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
 }
 
+/* Réduction des marges pour les petits écrans */
 body {
   margin: 10px;
 }
 
+/* Les filtres s'empilent verticalement pour éviter l'étroitesse */
 .filters {
   flex-direction: column;
   gap: 8px;
   align-items: center;
 }
 
+/* Chaque select prend toute la largeur disponible */
 select {
   min-width: 100%;
   max-width: 300px;
 }
 
+/* l’image s’adapte toujours à la taille de son conteneur sans déborder, tout en gardant ses proportions. */
 .recipeList {
-  max-width: 100%;  /* l’image s’adapte toujours à la taille de son conteneur sans déborder, tout en gardant ses proportions. */
+  max-width: 100%;
 }
 
+/* L'image suit la largeur de la carte */
 .recipeList img {
   height: auto;  /* la hauteur de l’élément est automatiquement ajustée en fonction de son contenu */
 }
 
+/* Bouton pleine largeur */
 button {
   width: 100%;
 }
 
+/* Animation conservée au survol */
 button:hover {
   background-color: #000000;
 }
@@ -151,8 +179,9 @@ button:hover {
 MOBILE
 ---------------------------------------------------*/
   /* Applique ces styles pour les écrans de 400px de large maximum*/
-
 @media (max-width: 400px) {
+
+  /* Une seule colonne sur très petits écrans pour maximiser la lisibilité */
 .home {
   grid-template-columns: 1fr;
 }

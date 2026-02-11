@@ -1,30 +1,67 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Link } from "react-router";
 
-const RecipeList = ({ recipes }) => {
-  const [categories, setCategories] = useState([]);
-  const [filter, setFilter] = useState("all");
+// Permet d'extraire l'_id si la valeur est un objet { _id, name }
+const extractId = (value) =>
+  value && typeof value === "object" ? value._id : value;
 
-  // Récupération des catégories depuis le backend
+const RecipeList = ({ recipes = [] }) => {
+  const [categories, setCategories] = useState([]);
+  const [typeOfCuisines, setTypeOfCuisines] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [selectedTypeOfCuisine, setSelectedTypeOfCuisine] = useState("all");
+
+  // Charger les catégories
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const res = await fetch("http://localhost:3000/categories");
-        if (!res.ok) throw new Error("Erreur lors du chargement des catégories");
-        const data = await res.json();
+        const response = await fetch("http://localhost:3000/categories");
+        if (!response.ok) {
+          throw new Error("Erreur lors du chargement des catégories");
+        }
+        const data = await response.json();
         setCategories(data);
-      } catch (err) {
-        console.error(err);
+      } catch (error) {
+        console.error(error);
       }
     };
+
     fetchCategories();
   }, []);
 
-  // Filtrage des recettes selon la catégorie sélectionnée
-  const filteredRecipes =
-    filter === "all"
-      ? recipes
-      : recipes.filter((recette) => recette.category === filter);
+  // Charger les types de cuisine
+  useEffect(() => {
+    const fetchTypeOfCuisines = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/typeOfCuisines");
+        if (!response.ok) {
+          throw new Error("Erreur lors du chargement des types de cuisine");
+        }
+        const data = await response.json();
+        setTypeOfCuisines(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchTypeOfCuisines();
+  }, []);
+
+  // Filtrer les recettes en fonction de la catégorie et du type sélectionnés
+  const filteredRecipes = useMemo(() => {
+    return recipes
+      .filter((recipe) =>
+        selectedCategory === "all"
+          ? true
+          : extractId(recipe.category) === selectedCategory
+      )
+      .filter((recipe) =>
+        selectedTypeOfCuisine === "all"
+          ? true
+          : recipe.typeOfCuisine &&
+            extractId(recipe.typeOfCuisine) === selectedTypeOfCuisine
+      );
+  }, [recipes, selectedCategory, selectedTypeOfCuisine]);
 
   return (
     <div>
@@ -32,11 +69,29 @@ const RecipeList = ({ recipes }) => {
 
       <label>
         Filtrer par catégorie :
-        <select value={filter} onChange={(e) => setFilter(e.target.value)}>
+        <select
+          value={selectedCategory}
+          onChange={(e) => setSelectedCategory(e.target.value)}
+        >
           <option value="all">Toutes les catégories</option>
-          {categories.map((cat) => (
-            <option key={cat._id} value={cat._id}>
-              {cat.name}
+          {categories.map((category) => (
+            <option key={category._id} value={category._id}>
+              {category.name}
+            </option>
+          ))}
+        </select>
+      </label>
+
+      <label>
+        Filtrer par type de cuisine :
+        <select
+          value={selectedTypeOfCuisine}
+          onChange={(e) => setSelectedTypeOfCuisine(e.target.value)}
+        >
+          <option value="all">Tous les types de cuisine</option>
+          {typeOfCuisines.map((typeOfCuisine) => (
+            <option key={typeOfCuisine._id} value={typeOfCuisine._id}>
+              {typeOfCuisine.name}
             </option>
           ))}
         </select>
@@ -44,15 +99,24 @@ const RecipeList = ({ recipes }) => {
 
       <ul>
         {filteredRecipes.length === 0 ? (
-          <p>Aucune recette trouvée.</p>
+          <p>
+            Aucune recette trouvée.
+            {selectedTypeOfCuisine !== "all" && (
+              <> Certaines recettes n’ont pas encore de type de cuisine renseigné.</>
+            )}
+          </p>
         ) : (
-          filteredRecipes.map((recette) => (
-            <li key={recette._id}>
-              <h2>{recette.title}</h2>
-              {recette.image && (
-                <img src={recette.image} alt={recette.title} width="150" />
+          filteredRecipes.map((recipe) => (
+            <li key={recipe._id}>
+              <h2>{recipe.title}</h2>
+              {recipe.image && (
+                <img
+                  src={recipe.image.trim?.() || recipe.image}
+                  alt={recipe.title}
+                  width="150"
+                />
               )}
-              <Link to={`/details/${recette._id}`}>Voir détails</Link>
+              <Link to={`/details/${recipe._id}`}>Voir détails</Link>
             </li>
           ))
         )}
